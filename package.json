@@ -1,0 +1,54 @@
+{
+  "name": "otus-auth",
+  "version": "1.0.0",
+  "description": "Authentication service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bl00dhound/otus-auth.git"
+  },
+  "author": "oleksii.kuznietsov@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bl00dhound/otus-auth/issues"
+  },
+  "homepage": "https://github.com/bl00dhound/otus-auth#readme",
+  "lint-staged": {
+    "**/*.ts": [
+      "eslint --fix",
+      "prettier-eslint --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.7",
+    "@types/express-pino-logger": "^4.0.2",
+    "@types/pino": "^6.3.0",
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier-eslint-cli": "^5.0.0",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-pino-logger": "^5.0.0",
+    "http-shutdown": "^1.2.2",
+    "knex": "^0.21.4",
+    "nodemon": "^2.0.4",
+    "pg": "^8.3.0",
+    "pino": "^6.5.0",
+    "pino-pretty": "^4.1.0"
+  }
+}
