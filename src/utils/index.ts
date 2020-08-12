@@ -1,9 +1,14 @@
-import { snakeCase } from 'snake-case';
+import { toSnakeCase } from './snakeCase.util';
+import { decorateResponseByUser } from './http.util';
+import {
+  generateHash, compareHash, jwtSign, jwtVerify,
+} from './secrets.util';
 
-export default (src: Record<string, number | Date | string>) => Object.entries(src).reduce(
-  (acc, pair) => ({
-    ...acc,
-    [snakeCase(pair[0])]: pair[1],
-  }),
-  {},
-);
+export default {
+  toSnakeCase,
+  generateHash,
+  compareHash,
+  jwtSign,
+  jwtVerify,
+  decorateResponseByUser,
+};
