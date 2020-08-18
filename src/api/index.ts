@@ -34,6 +34,8 @@ router.post('/logout', (_req, res) => {
   return res.status(200).send('OK');
 });
 
+router.get('/signin', (_req, res) => res.send('<h2>Please, login</h2>'));
+
 router.use('/auth', async (req, res) => {
   const authHeader = req.get('authorization');
   const token = authHeader && authHeader.split(' ')[1];

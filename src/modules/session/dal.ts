@@ -1,5 +1,3 @@
-import { omit as _omit } from 'lodash';
-
 import db from '../../providers/db';
 import IUser from '../../interfaces/IUser';
 import Utils from '../../utils';
@@ -18,7 +16,7 @@ const GET_PROPERTIES = [
 const Dal = {
   create: (user: Omit<IUser, 'id'>): Promise<IUser> => db('users')
     .insert(Utils.toSnakeCase(user))
-    .returning(_omit(GET_PROPERTIES, ['password']))
+    .returning(GET_PROPERTIES.filter((prop) => prop !== 'password'))
     .then((users) => users[0]),
   getByEmail: (email: string): Promise<IUser> => db('users')
     .first(...GET_PROPERTIES)
