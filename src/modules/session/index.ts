@@ -1,8 +1,11 @@
 import { UserSchema, LoginSchema } from './validate';
 import User from './dal';
+import Utils from '../../utils';
+import bus from '../../providers/bus';
+import logger from '../../providers/logger';
+
 import IUser from '../../interfaces/IUser';
 import ILoginData from '../../interfaces/ILoginData';
-import Utils from '../../utils';
 
 const Service = {
   create: async (data: Omit<IUser, 'id'>): Promise<IUser> => {
@@ -12,8 +15,15 @@ const Service = {
 
     const password = await Utils.generateHash(data.password);
     const user = { ...data, password };
+    const createdUser = await User.create(user);
 
-    return User.create(user);
+    try {
+      await bus.publish<IUser>('user:createUser', createdUser);
+    } catch (err) {
+      logger.err('[Bus publish error]: ', err);
+    }
+
+    return createdUser;
   },
   login: async (data: ILoginData): Promise<IUser> => {
     const isValid = LoginSchema(data);
